@@ -1,6 +1,7 @@
 package com.springboot.embeddeddb.controller;
 
 
+import com.springboot.embeddeddb.entity.AddToCart;
 import com.springboot.embeddeddb.entity.AddToWishlist;
 import com.springboot.embeddeddb.repository.AddToWishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,23 +45,41 @@ public class AddToWishlistControlller {
     }
 
     @PostMapping
-    public ResponseEntity createWishList(@RequestBody AddToWishlist addToWishlist){
-        AddToWishlist dbWishList= wishListRepository.save(addToWishlist);
-        return new ResponseEntity(dbWishList,HttpStatus.CREATED) ;
+    public ResponseEntity createWishList(@RequestBody AddToWishlist addToWishlist) {
+        AddToWishlist dbWishList = wishListRepository.save(addToWishlist);
+        return new ResponseEntity(dbWishList, HttpStatus.CREATED);
     }
 
     @PutMapping
-    public int updatePriceByPercent(@PathParam("wishId") int wishId,@PathParam("byPercent") int byPercent){
-        Optional<AddToWishlist> wishlist=wishListRepository.findById(wishId);
-        if(wishlist.isPresent())
-        {
-            int price=wishlist.get().getPrice();
-            int updatedPrice=price+price*byPercent/100;
-            AddToWishlist addToWishlist=wishlist.get();
+    public int updatePriceByPercent(@PathParam("wishId") int wishId, @PathParam("byPercent") int byPercent) {
+        Optional<AddToWishlist> wishlist = wishListRepository.findById(wishId);
+        if (wishlist.isPresent()) {
+            int price = wishlist.get().getPrice();
+            int updatedPrice = price + price * byPercent / 100;
+            AddToWishlist addToWishlist = wishlist.get();
             addToWishlist.setPrice(updatedPrice);
             return wishListRepository.save(addToWishlist).getPrice();
         }
         return 0;
+    }
+
+    @PutMapping(value="/update/{wishId}")
+    public ResponseEntity updateById(@PathVariable("wishId") int wishId, @RequestBody AddToWishlist addToWishlist){
+        Optional<AddToWishlist> wishlist=wishListRepository.findById(wishId);
+        if(wishlist.isPresent()){
+            addToWishlist.setWishId(wishlist.get().getWishId());
+            wishListRepository.save(addToWishlist);
+        }
+        return  new ResponseEntity("Record Updated",HttpStatus.OK);
+
+    }
+
+    @DeleteMapping
+    public ResponseEntity deleteById(@PathParam("wishId") int wishId) {
+        wishListRepository.deleteById(wishId);
+        return new ResponseEntity("Record deleted", HttpStatus.OK);
+
+
     }
 
 }
