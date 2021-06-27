@@ -6,6 +6,25 @@
 	},
 	"item": [
 		{
+			"name": "getAPIDoc",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/v2/api-docs",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v2",
+						"api-docs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "getAllCarts",
 			"request": {
 				"method": "GET",
@@ -188,25 +207,6 @@
 			"response": []
 		},
 		{
-			"name": "getAPIDoc",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/v2/api-docs",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"v2",
-						"api-docs"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "GetAllWishlistData",
 			"request": {
 				"method": "GET",
@@ -283,6 +283,68 @@
 					"port": "8080",
 					"path": [
 						"wishlist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateExistingWishlist",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \r\n        \"productName\": \"fitbit wireless earphone\",\r\n        \"quantity\": 5,\r\n        \"returnable\": false,\r\n        \"replacement\": false,\r\n        \"price\": 3500\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/wishlist/update/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wishlist",
+						"update",
+						"1"
+					],
+					"query": [
+						{
+							"key": "wishId",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteWishlistById",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/wishlist?wishId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"wishlist"
+					],
+					"query": [
+						{
+							"key": "wishId",
+							"value": "1"
+						}
 					]
 				}
 			},
