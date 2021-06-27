@@ -6,6 +6,8 @@ REST, SpringBoot, H2 - In MemoryDatabase, Maven, etc.
 Feature: This project implements AddToCart and AddToWishList feature.
 
 With RestEndpoint An Item can be added to the cart, Updated , Deleted, Read the cart data.
+Swagger ui URL:http://localhost:8080/swagger-ui.html#/
+H2 DB URL:http://localhost:8080/h2-db
 
 **h2 database console UI Screenshot**
 ![image](https://user-images.githubusercontent.com/37165268/123541663-45571080-d763-11eb-812e-8304d8a009b4.png)
